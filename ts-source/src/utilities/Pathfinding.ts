@@ -138,7 +138,7 @@ export function getRoomCallbackForRoadbuilding(roomName: string, allowSK: boolea
             let x: number, y: number, t: string;
             for (x = 0; x < 50; x++) {
                 for (y = 0; y < 50; y++) {
-                    t = Game.map.getRoomTerrain(x, y, roomName);
+                    t = Game.map.getTerrainAt(x, y, roomName);
                     if (t === "plain" || t === "swamp") {
                         costs.set(x, y, 0xfe);
                     }
@@ -151,7 +151,7 @@ export function getRoomCallbackForRoadbuilding(roomName: string, allowSK: boolea
     let x: number, y: number, t: string;
     for (x = 0; x < 50; x++) {
         for (y = 0; y < 50; y++) {
-            t = Game.map.getRoomTerrain(x, y, roomName);
+            t = Game.map.getTerrainAt(x, y, roomName);
             if (t === "plain") {
                 costs.set(x, y, 2);
             } else
@@ -170,7 +170,7 @@ export function getRoomCallbackForRoadbuilding(roomName: string, allowSK: boolea
             let x: number, y: number, t: string;
             for (x = -2; x < 3; x++) {
                 for (y = -2; y < 3; y++) {
-                    t = Game.map.getRoomTerrain(lair.pos.x + x, lair.pos.y + y, roomName);
+                    t = Game.map.getTerrainAt(lair.pos.x + x, lair.pos.y + y, roomName);
                     if (t === "plain" || t === "swamp") {
                         costs.set(lair.pos.x + x, lair.pos.y + y, 12);
                     }
@@ -188,7 +188,7 @@ export function getRoomCallbackForRoadbuilding(roomName: string, allowSK: boolea
         let x: number, y: number, t: string;
         for (x = -1; x < 2; x++) {
             for (y = -1; y < 2; y++) {
-                t = Game.map.getRoomTerrain(pos.x + x, pos.y + y, roomName);
+                t = Game.map.getTerrainAt(pos.x + x, pos.y + y, roomName);
                 if (t === "plain" || t === "swamp") {
                     costs.set(pos.x + x, pos.y + y, 8);
                 }
@@ -204,7 +204,7 @@ export function getRoomCallbackForRoadbuilding(roomName: string, allowSK: boolea
         let x: number, y: number, t: string;
         for (x = -1; x < 2; x++) {
             for (y = -1; y < 2; y++) {
-                t = Game.map.getRoomTerrain(pos.x + x, pos.y + y, roomName);
+                t = Game.map.getTerrainAt(pos.x + x, pos.y + y, roomName);
                 if (t === "plain" || t === "swamp") {
                     costs.set(pos.x + x, pos.y + y, 8);
                 }
@@ -225,7 +225,7 @@ export function getRoomCallbackForRoadbuilding(roomName: string, allowSK: boolea
             let x: number, y: number, t: string;
             for (x = -1; x < 2; x++) {
                 for (y = -1; y < 2; y++) {
-                    t = Game.map.getRoomTerrain(pos.x + x, pos.y + y, roomName);
+                    t = Game.map.getTerrainAt(pos.x + x, pos.y + y, roomName);
                     if (t === "plain" || t === "swamp") {
                         costs.set(pos.x + x, pos.y + y, 8);
                     }

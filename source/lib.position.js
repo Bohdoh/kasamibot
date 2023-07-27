@@ -12,7 +12,7 @@ function positionNextToBorder(pos) {
 }
 exports.positionNextToBorder = positionNextToBorder;
 function positionHasBuildableGround(pos) {
-    let posGround = Game.map.getRoomTerrain(pos);
+    let posGround = Game.map.getTerrainAt(pos);
     if (posGround === "plain" || posGround === "swamp") {
         return true;
     }

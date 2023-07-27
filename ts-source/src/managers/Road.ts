@@ -469,7 +469,7 @@ function buildRoadAtPosIfNotPresent(pos: RoomPosition): number {
     if (pos.x <= 0 || pos.x >= 49 || pos.y <= 0 || pos.y >= 49) {
         return -100;
     }
-    let posGround = Game.map.getRoomTerrain(pos);
+    let posGround = Game.map.getTerrainAt(pos);
     if (posGround !== "plain" && posGround !== "swamp") {
         return -100;
     }
@@ -507,7 +507,7 @@ export function buildRoadAroundPosition(pos: RoomPosition, range: number = 1, on
         for ( let y = -range; y < range + 1; y++) {
             let position = new RoomPosition(pos.x + x, pos.y + y, pos.roomName);
             if (includeMiddle || !(x === 0 && y === 0)) {
-                if (!roadConstructionLimitReached() && ((!onlySwamps || Game.map.getRoomTerrain(position) === "swamp") && (!onlyCorners || Math.abs(x) + Math.abs(y) < range + 1))) {
+                if (!roadConstructionLimitReached() && ((!onlySwamps || Game.map.getTerrainAt(position) === "swamp") && (!onlyCorners || Math.abs(x) + Math.abs(y) < range + 1))) {
                     if (buildRoadAtPosIfNotPresent(position) === ERR_FULL) {
                         return false;
                     }
@@ -523,7 +523,7 @@ function buildRoadBetween(pos1: RoomPosition, pos2: RoomPosition, onlySwamps: bo
     for (let position of pathForRoad) {
         let room = Game.rooms[position.roomName];
         if (room !== undefined && room instanceof Room &&
-        (!roadConstructionLimitReached() && (!onlySwamps || Game.map.getRoomTerrain(position) === "swamp"))) {
+        (!roadConstructionLimitReached() && (!onlySwamps || Game.map.getTerrainAt(position) === "swamp"))) {
             if (buildRoadAtPosIfNotPresent(position) === ERR_FULL) {
                 return false;
             }

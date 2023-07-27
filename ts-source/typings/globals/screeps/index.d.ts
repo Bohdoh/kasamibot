@@ -986,12 +986,12 @@ declare class GameMap {
      * @param y Y position in the room.
      * @param roomName The room name.
      */
-    getRoomTerrain(x: number, y: number, roomName: string): string;
+    getTerrainAt(x: number, y: number, roomName: string): string;
     /**
      * Get terrain type at the specified room position. This method works for any room in the world even if you have no access to it.
      * @param pos The position object.
      */
-    getRoomTerrain(pos: RoomPosition): string;
+    getTerrainAt(pos: RoomPosition): string;
     /**
      * Check if the room is available to move into.
      * @param roomName The room name.

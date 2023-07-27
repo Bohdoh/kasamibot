@@ -177,7 +177,7 @@ export class WallManager extends Manager {
                 if (controllerPos.x + x > 0 && controllerPos.x + x < 49 && controllerPos.y + y > 0 && controllerPos.y + y < 49
                 && (x !== 0 || y !== 0)) {
                     let pos = new RoomPosition(controllerPos.x + x, controllerPos.y + y, controllerPos.roomName)
-                    let terrain = Game.map.getRoomTerrain(pos);
+                    let terrain = Game.map.getTerrainAt(pos);
                     if (terrain === 'plain' || terrain === 'swamp') {
                         BuildLib.buildIfNotPresent(STRUCTURE_RAMPART, pos, 0, 0, true, false);
                     }
@@ -361,7 +361,7 @@ function calculateBorderwall(room: Room): RoomPosition[] {
 }
 
 function posShouldBeBorderWall(pos: RoomPosition) {
-    let terrain = Game.map.getRoomTerrain(pos);
+    let terrain = Game.map.getTerrainAt(pos);
     if (terrain === "swamp" || terrain === "plain") {
         let closestExit = pos.findClosestByRange(FIND_EXIT) as RoomPosition;
         if (pos.getRangeTo(closestExit) === 2) {
@@ -427,7 +427,7 @@ function makeWallpositionsFromPath(path: RoomPosition[]): RoomPosition[] {
         positions.push(path[i])
         if (path[i].x !== path[(i + 1) % path.length].x &&
             path[i].y !== path[(i + 1) % path.length].y) {
-                if (Game.map.getRoomTerrain(path[(i + 1) % path.length].x, path[i].y, path[i].roomName) !== "wall") {
+                if (Game.map.getTerrainAt(path[(i + 1) % path.length].x, path[i].y, path[i].roomName) !== "wall") {
                     positions.push(new RoomPosition(path[i].x, path[(i + 1) % path.length].y, path[i].roomName));
                 }
             }
@@ -436,7 +436,7 @@ function makeWallpositionsFromPath(path: RoomPosition[]): RoomPosition[] {
 }
 
 export function outerwallPositionNeeded(pos: RoomPosition) {
-    return Game.map.getRoomTerrain(pos) !== "wall";
+    return Game.map.getTerrainAt(pos) !== "wall";
 }
 
 function borderwallPositionNeeded(storage: StructureStorage, pos: RoomPosition, positions: RoomPosition[], cm: CostMatrix): boolean {
@@ -461,7 +461,7 @@ function getOuterWallRoomCallback(room: Room, basePos: RoomPosition, withHorizon
 
     for (let x of _.range(0, 50)) {
         for (let y of _.range(0, 50)) {
-            let terrain = Game.map.getRoomTerrain(x, y, room.name);
+            let terrain = Game.map.getTerrainAt(x, y, room.name);
             if (terrain === "wall") {
                 costs.set(x, y, 1);
             } else

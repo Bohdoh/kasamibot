@@ -81,7 +81,7 @@ Mineral.prototype.getMiningPositions = function(): RoomPosition[] {
         for (let y = -1; y < 2; y++) {
         let position = new RoomPosition(this.pos.x + x, this.pos.y + y, this.room.name);
         if (!(position.x === this.pos.x && position.y === this.pos.y)) {
-                let terrainAtPositon = Game.map.getRoomTerrain(position);
+                let terrainAtPositon = Game.map.getTerrainAt(position);
                 if (terrainAtPositon === "swamp" || terrainAtPositon === "plain") {
                     positions.push(position);
                 }
