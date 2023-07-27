@@ -244,7 +244,7 @@ function getAttackSpotsForBank(bank) {
         for (let y = -1; y < 2; y++) {
             let position = new RoomPosition(bank.pos.x + x, bank.pos.y + y, bank.room.name);
             if (!(position.x === bank.pos.x && position.y === bank.pos.y)) {
-                let terrainAtPositon = Game.map.getTerrainAt(position);
+                let terrainAtPositon = Game.map.getRoomTerrain(position);
                 if (terrainAtPositon === "swamp" || terrainAtPositon === "plain") {
                     positions.push(position);
                 }

@@ -6,7 +6,7 @@ RoomPosition.prototype.hasFreeSpaceAround = function(): boolean {
     for (let x = -1; x < 2; x++) {
         for (let y = -1; y < 2; y++) {
         let position = new RoomPosition(this.x + x, this.y + y, this.roomName);
-            let terrainAtPositon = Game.map.getTerrainAt(position);
+            let terrainAtPositon = Game.map.getRoomTerrain(position);
             if (terrainAtPositon !== "swamp" && terrainAtPositon !== "plain") {
                 return false;
             }
@@ -21,7 +21,7 @@ RoomPosition.prototype.getFreeSpaceAround = function(): number {
     for (let x = -1; x < 2; x++) {
         for (let y = -1; y < 2; y++) {
         let position = new RoomPosition(this.x + x, this.y + y, this.roomName);
-            let terrainAtPositon = Game.map.getTerrainAt(position);
+            let terrainAtPositon = Game.map.getRoomTerrain(position);
             if (terrainAtPositon === "swamp" || terrainAtPositon === "plain") {
                 c++;
             }

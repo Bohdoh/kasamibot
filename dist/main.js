@@ -566,7 +566,7 @@ module.exports =
 	            let x, y, t;
 	            for (x = 0; x < 50; x++) {
 	                for (y = 0; y < 50; y++) {
-	                    t = Game.map.getTerrainAt(x, y, roomName);
+	                    t = Game.map.getRoomTerrain(x, y, roomName);
 	                    if (t === "plain" || t === "swamp") {
 	                        costs.set(x, y, 0xfe);
 	                    }
@@ -578,7 +578,7 @@ module.exports =
 	    let x, y, t;
 	    for (x = 0; x < 50; x++) {
 	        for (y = 0; y < 50; y++) {
-	            t = Game.map.getTerrainAt(x, y, roomName);
+	            t = Game.map.getRoomTerrain(x, y, roomName);
 	            if (t === "plain") {
 	                costs.set(x, y, 2);
 	            }
@@ -596,7 +596,7 @@ module.exports =
 	            let x, y, t;
 	            for (x = -2; x < 3; x++) {
 	                for (y = -2; y < 3; y++) {
-	                    t = Game.map.getTerrainAt(lair.pos.x + x, lair.pos.y + y, roomName);
+	                    t = Game.map.getRoomTerrain(lair.pos.x + x, lair.pos.y + y, roomName);
 	                    if (t === "plain" || t === "swamp") {
 	                        costs.set(lair.pos.x + x, lair.pos.y + y, 12);
 	                    }
@@ -613,7 +613,7 @@ module.exports =
 	        let x, y, t;
 	        for (x = -1; x < 2; x++) {
 	            for (y = -1; y < 2; y++) {
-	                t = Game.map.getTerrainAt(pos.x + x, pos.y + y, roomName);
+	                t = Game.map.getRoomTerrain(pos.x + x, pos.y + y, roomName);
 	                if (t === "plain" || t === "swamp") {
 	                    costs.set(pos.x + x, pos.y + y, 8);
 	                }
@@ -629,7 +629,7 @@ module.exports =
 	        let x, y, t;
 	        for (x = -1; x < 2; x++) {
 	            for (y = -1; y < 2; y++) {
-	                t = Game.map.getTerrainAt(pos.x + x, pos.y + y, roomName);
+	                t = Game.map.getRoomTerrain(pos.x + x, pos.y + y, roomName);
 	                if (t === "plain" || t === "swamp") {
 	                    costs.set(pos.x + x, pos.y + y, 8);
 	                }
@@ -649,7 +649,7 @@ module.exports =
 	            let x, y, t;
 	            for (x = -1; x < 2; x++) {
 	                for (y = -1; y < 2; y++) {
-	                    t = Game.map.getTerrainAt(pos.x + x, pos.y + y, roomName);
+	                    t = Game.map.getRoomTerrain(pos.x + x, pos.y + y, roomName);
 	                    if (t === "plain" || t === "swamp") {
 	                        costs.set(pos.x + x, pos.y + y, 8);
 	                    }
@@ -857,7 +857,7 @@ module.exports =
 	    let cm = new PathFinder.CostMatrix;
 	    for (let x of _.range(0, 50)) {
 	        for (let y of _.range(0, 50)) {
-	            let terrain = Game.map.getTerrainAt(x, y, basePos.roomName);
+	            let terrain = Game.map.getRoomTerrain(x, y, basePos.roomName);
 	            if (terrain === "wall") {
 	                cm.set(x, y, 1);
 	            }
@@ -1024,13 +1024,13 @@ module.exports =
 	                break;
 	            }
 	        }
-	        let t1 = Game.map.getTerrainAt(basePos.x + (s * 4), basePos.y + 1, basePos.roomName);
+	        let t1 = Game.map.getRoomTerrain(basePos.x + (s * 4), basePos.y + 1, basePos.roomName);
 	        if (t1 === "swamp" || t1 === "plain") {
 	            if (!(basePos.x + (s * 4) < 3 || basePos.x + (s * 4) > 46 || basePos.y + 1 < 3 || basePos.y + 1 > 46)) {
 	                extPositions.push(shortPosRoomMaker(basePos.x + (s * 4), basePos.y + 1, basePos.roomName));
 	            }
 	        }
-	        let t2 = Game.map.getTerrainAt(basePos.x + (s * 5), basePos.y + 1, basePos.roomName);
+	        let t2 = Game.map.getRoomTerrain(basePos.x + (s * 5), basePos.y + 1, basePos.roomName);
 	        if (t2 === "swamp" || t2 === "plain") {
 	            if (!(basePos.x + (s * 5) < 3 || basePos.x + (s * 5) > 46 || basePos.y + 1 < 3 || basePos.y + 1 > 46)) {
 	                extPositions.push(shortPosRoomMaker(basePos.x + (s * 5), basePos.y + 1, basePos.roomName));
@@ -1066,7 +1066,7 @@ module.exports =
 	                }
 	            }
 	        }
-	        let t = Game.map.getTerrainAt(basePos.x + (s * 3), basePos.y - 1, basePos.roomName);
+	        let t = Game.map.getRoomTerrain(basePos.x + (s * 3), basePos.y - 1, basePos.roomName);
 	        if (t === "swamp" || t === "plain") {
 	            extPositions.push(shortPosRoomMaker(basePos.x + (s * 3), basePos.y - 1, basePos.roomName));
 	        }
@@ -1079,7 +1079,7 @@ module.exports =
 	            if (pos.x + x < 3 || pos.x + x > 46 || pos.y + y < 3 || pos.y + y > 46) {
 	                return false;
 	            }
-	            let terrain = Game.map.getTerrainAt(pos.x + x, pos.y + y, pos.roomName);
+	            let terrain = Game.map.getRoomTerrain(pos.x + x, pos.y + y, pos.roomName);
 	            if (terrain !== "swamp" && terrain !== "plain") {
 	                if (x === 0 && y === 0) {
 	                    return false;
@@ -1097,7 +1097,7 @@ module.exports =
 	    for (let x of [-1, 0, 1]) {
 	        for (let y of [-1, 0, 1]) {
 	            if (x !== 0 || y !== 0) {
-	                let terrain = Game.map.getTerrainAt(pos.x + x, pos.y + y, pos.roomName);
+	                let terrain = Game.map.getRoomTerrain(pos.x + x, pos.y + y, pos.roomName);
 	                if (terrain === "swamp" || terrain === "plain") {
 	                    list.push(shortPosRoomMaker(pos.x + x, pos.y + y, pos.roomName));
 	                }
@@ -1882,7 +1882,7 @@ module.exports =
 	    }
 	    for (let x of _.range(3, 47)) {
 	        for (let y of _.range(3, 47)) {
-	            if (Game.map.getTerrainAt(x, y, roomName) === "wall") {
+	            if (Game.map.getRoomTerrain(x, y, roomName) === "wall") {
 	                matrix.set(x, y, 1);
 	            }
 	        }
@@ -3794,7 +3794,7 @@ module.exports =
 	        for (let y = -1; y < 2; y++) {
 	            let position = new RoomPosition(this.pos.x + x, this.pos.y + y, this.room.name);
 	            if (!(position.x === this.pos.x && position.y === this.pos.y)) {
-	                let terrainAtPositon = Game.map.getTerrainAt(position);
+	                let terrainAtPositon = Game.map.getRoomTerrain(position);
 	                if (terrainAtPositon === "swamp" || terrainAtPositon === "plain") {
 	                    positions.push(position);
 	                }
@@ -4058,7 +4058,7 @@ module.exports =
 	    for (let x = -1; x < 2; x++) {
 	        for (let y = -1; y < 2; y++) {
 	            let position = new RoomPosition(this.x + x, this.y + y, this.roomName);
-	            let terrainAtPositon = Game.map.getTerrainAt(position);
+	            let terrainAtPositon = Game.map.getRoomTerrain(position);
 	            if (terrainAtPositon !== "swamp" && terrainAtPositon !== "plain") {
 	                return false;
 	            }
@@ -4071,7 +4071,7 @@ module.exports =
 	    for (let x = -1; x < 2; x++) {
 	        for (let y = -1; y < 2; y++) {
 	            let position = new RoomPosition(this.x + x, this.y + y, this.roomName);
-	            let terrainAtPositon = Game.map.getTerrainAt(position);
+	            let terrainAtPositon = Game.map.getRoomTerrain(position);
 	            if (terrainAtPositon === "swamp" || terrainAtPositon === "plain") {
 	                c++;
 	            }
@@ -4186,7 +4186,7 @@ module.exports =
 	        for (let y = -1; y < 2; y++) {
 	            let position = new RoomPosition(this.pos.x + x, this.pos.y + y, this.room.name);
 	            if (!(position.x === this.pos.x && position.y === this.pos.y)) {
-	                let terrainAtPositon = Game.map.getTerrainAt(position);
+	                let terrainAtPositon = Game.map.getRoomTerrain(position);
 	                if (terrainAtPositon === "swamp" || terrainAtPositon === "plain") {
 	                    positions.push(position);
 	                }
@@ -6755,7 +6755,7 @@ module.exports =
 	    let terrain;
 	    for (let x of _.range(1, 49)) {
 	        for (let y of _.range(1, 49)) {
-	            terrain = Game.map.getTerrainAt(x, y, roomName);
+	            terrain = Game.map.getRoomTerrain(x, y, roomName);
 	            if (terrain === 'swamp') {
 	                swamp++;
 	            }
@@ -7484,7 +7484,7 @@ module.exports =
 	}
 	exports.positionNextToBorder = positionNextToBorder;
 	function positionHasBuildableGround(pos) {
-	    let posGround = Game.map.getTerrainAt(pos);
+	    let posGround = Game.map.getRoomTerrain(pos);
 	    if (posGround === "plain" || posGround === "swamp") {
 	        return true;
 	    }
@@ -8298,7 +8298,7 @@ module.exports =
 	        for (let y = -1; y < 2; y++) {
 	            let position = new RoomPosition(bank.pos.x + x, bank.pos.y + y, bank.room.name);
 	            if (!(position.x === bank.pos.x && position.y === bank.pos.y)) {
-	                let terrainAtPositon = Game.map.getTerrainAt(position);
+	                let terrainAtPositon = Game.map.getRoomTerrain(position);
 	                if (terrainAtPositon === "swamp" || terrainAtPositon === "plain") {
 	                    positions.push(position);
 	                }
@@ -12820,7 +12820,7 @@ module.exports =
 	                if (controllerPos.x + x > 0 && controllerPos.x + x < 49 && controllerPos.y + y > 0 && controllerPos.y + y < 49
 	                    && (x !== 0 || y !== 0)) {
 	                    let pos = new RoomPosition(controllerPos.x + x, controllerPos.y + y, controllerPos.roomName);
-	                    let terrain = Game.map.getTerrainAt(pos);
+	                    let terrain = Game.map.getRoomTerrain(pos);
 	                    if (terrain === 'plain' || terrain === 'swamp') {
 	                        BuildLib.buildIfNotPresent(STRUCTURE_RAMPART, pos, 0, 0, true, false);
 	                    }
@@ -12987,7 +12987,7 @@ module.exports =
 	    return neededPositions;
 	}
 	function posShouldBeBorderWall(pos) {
-	    let terrain = Game.map.getTerrainAt(pos);
+	    let terrain = Game.map.getRoomTerrain(pos);
 	    if (terrain === "swamp" || terrain === "plain") {
 	        let closestExit = pos.findClosestByRange(FIND_EXIT);
 	        if (pos.getRangeTo(closestExit) === 2) {
@@ -13053,7 +13053,7 @@ module.exports =
 	        positions.push(path[i]);
 	        if (path[i].x !== path[(i + 1) % path.length].x &&
 	            path[i].y !== path[(i + 1) % path.length].y) {
-	            if (Game.map.getTerrainAt(path[(i + 1) % path.length].x, path[i].y, path[i].roomName) !== "wall") {
+	            if (Game.map.getRoomTerrain(path[(i + 1) % path.length].x, path[i].y, path[i].roomName) !== "wall") {
 	                positions.push(new RoomPosition(path[i].x, path[(i + 1) % path.length].y, path[i].roomName));
 	            }
 	        }
@@ -13061,7 +13061,7 @@ module.exports =
 	    return positions;
 	}
 	function outerwallPositionNeeded(pos) {
-	    return Game.map.getTerrainAt(pos) !== "wall";
+	    return Game.map.getRoomTerrain(pos) !== "wall";
 	}
 	exports.outerwallPositionNeeded = outerwallPositionNeeded;
 	function borderwallPositionNeeded(storage, pos, positions, cm) {
@@ -13084,7 +13084,7 @@ module.exports =
 	    let costs = new PathFinder.CostMatrix;
 	    for (let x of _.range(0, 50)) {
 	        for (let y of _.range(0, 50)) {
-	            let terrain = Game.map.getTerrainAt(x, y, room.name);
+	            let terrain = Game.map.getRoomTerrain(x, y, room.name);
 	            if (terrain === "wall") {
 	                costs.set(x, y, 1);
 	            }
@@ -21939,7 +21939,7 @@ module.exports =
 	    if (pos.x <= 0 || pos.x >= 49 || pos.y <= 0 || pos.y >= 49) {
 	        return -100;
 	    }
-	    let posGround = Game.map.getTerrainAt(pos);
+	    let posGround = Game.map.getRoomTerrain(pos);
 	    if (posGround !== "plain" && posGround !== "swamp") {
 	        return -100;
 	    }
@@ -21975,7 +21975,7 @@ module.exports =
 	        for (let y = -range; y < range + 1; y++) {
 	            let position = new RoomPosition(pos.x + x, pos.y + y, pos.roomName);
 	            if (includeMiddle || !(x === 0 && y === 0)) {
-	                if (!roadConstructionLimitReached() && ((!onlySwamps || Game.map.getTerrainAt(position) === "swamp") && (!onlyCorners || Math.abs(x) + Math.abs(y) < range + 1))) {
+	                if (!roadConstructionLimitReached() && ((!onlySwamps || Game.map.getRoomTerrain(position) === "swamp") && (!onlyCorners || Math.abs(x) + Math.abs(y) < range + 1))) {
 	                    if (buildRoadAtPosIfNotPresent(position) === ERR_FULL) {
 	                        return false;
 	                    }
@@ -21991,7 +21991,7 @@ module.exports =
 	    for (let position of pathForRoad) {
 	        let room = Game.rooms[position.roomName];
 	        if (room !== undefined && room instanceof Room &&
-	            (!roadConstructionLimitReached() && (!onlySwamps || Game.map.getTerrainAt(position) === "swamp"))) {
+	            (!roadConstructionLimitReached() && (!onlySwamps || Game.map.getRoomTerrain(position) === "swamp"))) {
 	            if (buildRoadAtPosIfNotPresent(position) === ERR_FULL) {
 	                return false;
 	            }

@@ -144,7 +144,7 @@ function addSingleExtensions(basePos, extPositions) {
     let cm = new PathFinder.CostMatrix;
     for (let x of _.range(0, 50)) {
         for (let y of _.range(0, 50)) {
-            let terrain = Game.map.getTerrainAt(x, y, basePos.roomName);
+            let terrain = Game.map.getRoomTerrain(x, y, basePos.roomName);
             if (terrain === "wall") {
                 cm.set(x, y, 1);
             }
@@ -311,13 +311,13 @@ function addLowerWings(basePos, extPositions, roadPositions) {
                 break;
             }
         }
-        let t1 = Game.map.getTerrainAt(basePos.x + (s * 4), basePos.y + 1, basePos.roomName);
+        let t1 = Game.map.getRoomTerrain(basePos.x + (s * 4), basePos.y + 1, basePos.roomName);
         if (t1 === "swamp" || t1 === "plain") {
             if (!(basePos.x + (s * 4) < 3 || basePos.x + (s * 4) > 46 || basePos.y + 1 < 3 || basePos.y + 1 > 46)) {
                 extPositions.push(shortPosRoomMaker(basePos.x + (s * 4), basePos.y + 1, basePos.roomName));
             }
         }
-        let t2 = Game.map.getTerrainAt(basePos.x + (s * 5), basePos.y + 1, basePos.roomName);
+        let t2 = Game.map.getRoomTerrain(basePos.x + (s * 5), basePos.y + 1, basePos.roomName);
         if (t2 === "swamp" || t2 === "plain") {
             if (!(basePos.x + (s * 5) < 3 || basePos.x + (s * 5) > 46 || basePos.y + 1 < 3 || basePos.y + 1 > 46)) {
                 extPositions.push(shortPosRoomMaker(basePos.x + (s * 5), basePos.y + 1, basePos.roomName));
@@ -353,7 +353,7 @@ function addMainWings(basePos, extPositions, roadPositions) {
                 }
             }
         }
-        let t = Game.map.getTerrainAt(basePos.x + (s * 3), basePos.y - 1, basePos.roomName);
+        let t = Game.map.getRoomTerrain(basePos.x + (s * 3), basePos.y - 1, basePos.roomName);
         if (t === "swamp" || t === "plain") {
             extPositions.push(shortPosRoomMaker(basePos.x + (s * 3), basePos.y - 1, basePos.roomName));
         }
@@ -366,7 +366,7 @@ function buildableAroundPos(pos) {
             if (pos.x + x < 3 || pos.x + x > 46 || pos.y + y < 3 || pos.y + y > 46) {
                 return false;
             }
-            let terrain = Game.map.getTerrainAt(pos.x + x, pos.y + y, pos.roomName);
+            let terrain = Game.map.getRoomTerrain(pos.x + x, pos.y + y, pos.roomName);
             if (terrain !== "swamp" && terrain !== "plain") {
                 if (x === 0 && y === 0) {
                     return false;
@@ -384,7 +384,7 @@ function addPositionsAround(pos, list) {
     for (let x of [-1, 0, 1]) {
         for (let y of [-1, 0, 1]) {
             if (x !== 0 || y !== 0) {
-                let terrain = Game.map.getTerrainAt(pos.x + x, pos.y + y, pos.roomName);
+                let terrain = Game.map.getRoomTerrain(pos.x + x, pos.y + y, pos.roomName);
                 if (terrain === "swamp" || terrain === "plain") {
                     list.push(shortPosRoomMaker(pos.x + x, pos.y + y, pos.roomName));
                 }

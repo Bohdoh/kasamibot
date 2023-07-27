@@ -30,7 +30,7 @@ function findSpawnLocation(roomName, firstRoom = false) {
     }
     for (let x of _.range(3, 47)) {
         for (let y of _.range(3, 47)) {
-            if (Game.map.getTerrainAt(x, y, roomName) === "wall") {
+            if (Game.map.getRoomTerrain(x, y, roomName) === "wall") {
                 matrix.set(x, y, 1);
             }
         }

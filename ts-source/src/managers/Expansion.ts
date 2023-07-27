@@ -474,7 +474,7 @@ function getSwampValue(roomName: string): number {
 
     for (let x of _.range(1, 49)) {
         for (let y of _.range(1, 49)) {
-            terrain = Game.map.getTerrainAt(x, y, roomName);
+            terrain = Game.map.getRoomTerrain(x, y, roomName);
             if (terrain === 'swamp') {
                 swamp++;
             } else
